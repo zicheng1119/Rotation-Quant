@@ -5,7 +5,6 @@ from collections.abc import Iterator
 import torch
 
 
-TINYLLAMA_BASE_DIR = "models/TinyLlama-1.1B-intermediate-step-1431k-3T"
 
 LLAMA_LINEAR_SUFFIXES = (
     "self_attn.q_proj",
@@ -44,13 +43,13 @@ def iter_llama_ffn_modules(model: torch.nn.Module) -> Iterator[tuple[str, torch.
         yield f"model.layers.{index}.mlp", ffn
 
 
-def load_causal_lm(model_dir: str, dtype: str = "float16", device_map: str | None = None):
+def load_causal_lm(model_dir: str, dtype: str = "float16", device_map: str | None = "auto"):
     """Load a local Hugging Face causal LM without tying the code to one checkpoint."""
     try:
         from transformers import AutoModelForCausalLM, AutoTokenizer
     except ImportError as exc:
         raise RuntimeError(
-            "transformers is required to load TinyLlama. Install project requirements first."
+            "transformers is required to load a causal LM. Install project requirements first."
         ) from exc
 
     torch_dtype = {

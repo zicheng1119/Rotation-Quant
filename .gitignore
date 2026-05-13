@@ -15,6 +15,9 @@ runs/
 wandb/
 *.log
 
+# Large paper PDFs (too big for github, keep locally)
+RefPapers/
+
 # OS/editor noise
 .DS_Store
 .vscode/
