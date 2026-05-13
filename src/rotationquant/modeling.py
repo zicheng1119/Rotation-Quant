@@ -6,6 +6,8 @@ import torch
 
 
 
+TINYLLAMA_BASE_DIR = "models/TinyLlama-1.1B-intermediate-step-1431k-3T"
+
 LLAMA_LINEAR_SUFFIXES = (
     "self_attn.q_proj",
     "self_attn.k_proj",
