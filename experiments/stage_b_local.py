@@ -9,7 +9,7 @@ from pathlib import Path
 import torch
 from tqdm import tqdm
 
-from rotationquant.activation_capture import TinyLlamaLocalIOCapture
+from rotationquant.activation_capture import LlamaLocalIOCapture
 from rotationquant.metrics import tensor_metrics
 from rotationquant.modeling import TINYLLAMA_BASE_DIR, load_causal_lm
 from rotationquant.ppl import load_text_dataset, tokenize_texts
@@ -156,7 +156,7 @@ def main() -> None:
     input_ids = tokenize_texts(tokenizer, list(texts), max_samples=args.max_samples)[:, : args.sequence_length]
     input_ids = input_ids.to(args.device or next(model.parameters()).device)
 
-    with TinyLlamaLocalIOCapture(model, layer_limit=args.layer_limit) as capture:
+    with LlamaLocalIOCapture(model, layer_limit=args.layer_limit) as capture:
         with torch.no_grad():
             model(input_ids)
 
