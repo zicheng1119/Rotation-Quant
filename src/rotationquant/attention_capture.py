@@ -112,7 +112,7 @@ class _CaptureAttentionWrapper(torch.nn.Module):
         return attn_output, attn_weights
 
 
-class TinyLlamaAttentionCapture:
+class LlamaAttentionCapture:
     """Capture Stage C attention internals by temporarily wrapping self-attention."""
 
     def __init__(self, model: torch.nn.Module, layer_limit: int | None = None) -> None:
@@ -121,7 +121,7 @@ class TinyLlamaAttentionCapture:
         self.records: list[AttentionIORecord] = []
         self._originals: list[tuple[torch.nn.Module, torch.nn.Module]] = []
 
-    def __enter__(self) -> TinyLlamaAttentionCapture:
+    def __enter__(self) -> LlamaAttentionCapture:
         for layer_index, layer in iter_llama_decoder_layers(self.model):
             if self.layer_limit is not None and layer_index >= self.layer_limit:
                 continue
@@ -138,3 +138,6 @@ class TinyLlamaAttentionCapture:
         for layer, original in self._originals:
             layer.self_attn = original
         self._originals.clear()
+
+
+TinyLlamaAttentionCapture = LlamaAttentionCapture
