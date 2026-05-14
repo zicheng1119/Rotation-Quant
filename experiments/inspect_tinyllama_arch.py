@@ -9,7 +9,7 @@ TINYLLAMA_BASE_DIR = "models/TinyLlama-1.1B-intermediate-step-1431k-3T"
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Inspect TinyLlama architecture for quantization planning.")
+    parser = argparse.ArgumentParser(description="Inspect LLaMA architecture for quantization planning.")
     parser.add_argument("--model-dir", default=TINYLLAMA_BASE_DIR)
     parser.add_argument("--output", default="outputs/model_arch/tinyllama_architecture.json")
     return parser.parse_args()
