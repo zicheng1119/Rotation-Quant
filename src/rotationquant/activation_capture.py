@@ -51,7 +51,7 @@ def _layer_index_from_name(name: str) -> int | None:
         return None
 
 
-class TinyLlamaActivationCapture:
+class LlamaActivationCapture:
     """Capture Stage B activation sites during one or more forward passes."""
 
     def __init__(self, model: torch.nn.Module, layer_limit: int | None = None) -> None:
@@ -61,7 +61,7 @@ class TinyLlamaActivationCapture:
         self._handles: list[torch.utils.hooks.RemovableHandle] = []
         self._ffn_temp: dict[int, dict[str, torch.Tensor]] = {}
 
-    def __enter__(self) -> TinyLlamaActivationCapture:
+    def __enter__(self) -> LlamaActivationCapture:
         for layer_index, layer in iter_llama_decoder_layers(self.model):
             if self.layer_limit is not None and layer_index >= self.layer_limit:
                 continue
@@ -113,7 +113,7 @@ class TinyLlamaActivationCapture:
         )
 
 
-class TinyLlamaLocalIOCapture:
+class LlamaLocalIOCapture:
     """Capture Linear and FFN input/output tensors for Stage B local experiments."""
 
     def __init__(self, model: torch.nn.Module, layer_limit: int | None = None) -> None:
@@ -123,7 +123,7 @@ class TinyLlamaLocalIOCapture:
         self.ffn_records: list[FFNIORecord] = []
         self._handles: list[torch.utils.hooks.RemovableHandle] = []
 
-    def __enter__(self) -> TinyLlamaLocalIOCapture:
+    def __enter__(self) -> LlamaLocalIOCapture:
         for name, module in iter_llama_target_linears(self.model):
             layer_index = _layer_index_from_name(name)
             if self.layer_limit is not None and layer_index is not None and layer_index >= self.layer_limit:
@@ -167,3 +167,8 @@ class TinyLlamaLocalIOCapture:
             )
 
         return hook
+
+
+# Backward-compatible aliases
+TinyLlamaActivationCapture = LlamaActivationCapture
+TinyLlamaLocalIOCapture = LlamaLocalIOCapture
