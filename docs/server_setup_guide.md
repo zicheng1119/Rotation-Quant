@@ -7,7 +7,7 @@
 
 ## 2. 克隆代码
 ```bash
-git clone https://github.com/CarreyLiu-code/Rotation-Quant.git -b stage1-report
+git clone https://github.com/zicheng1119/Rotation-Quant.git
 cd Rotation-Quant
 ```
 
@@ -39,28 +39,15 @@ print('Layers:', len(list(m.named_modules())))
 ```
 
 ## 6. 运行实验
+
 ```bash
-# Stage A
-bash scripts/llama3-8b/run_stage_a_tensor_sweep.sh
-bash scripts/llama3-8b/run_stage_a_ppl.sh
-
-# Stage B
-bash scripts/llama3-8b/run_stage_b_activation.sh
-bash scripts/llama3-8b/run_stage_b_local.sh
-bash scripts/llama3-8b/run_stage_b_ppl.sh
-
-# Stage C
-bash scripts/llama3-8b/run_stage_c_invariance.sh
-bash scripts/llama3-8b/run_stage_c_kv_local.sh
-bash scripts/llama3-8b/run_stage_c_qjl.sh
-bash scripts/llama3-8b/run_stage_c_attention_layer.sh
-bash scripts/llama3-8b/run_stage_c_ppl.sh
-bash scripts/llama3-8b/run_stage_c_accuracy.sh  # 可选
+# 一键运行全部 11 个实验
+bash scripts/llama3-8b/run_all.sh
 ```
 
 ## 7. 汇总结果
+
 ```bash
-PYTHONPATH=src python experiments/summarize_stage_a_tensor.py outputs/stage_a/<run_id>
-PYTHONPATH=src python experiments/summarize_stage_b.py outputs/stage_b/<run_id>
-PYTHONPATH=src python experiments/summarize_stage_c.py outputs/stage_c/<run_id>
+# 自动找到最新的 run_id 并汇总
+bash scripts/llama3-8b/summarize_all.sh
 ```
