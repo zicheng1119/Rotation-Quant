@@ -8,7 +8,7 @@ from pathlib import Path
 
 import torch
 
-from rotationquant.modeling import TINYLLAMA_BASE_DIR, load_causal_lm
+from rotationquant.modeling import load_causal_lm
 from rotationquant.ppl import evaluate_causal_lm_ppl, load_text_dataset, tokenize_texts
 from rotationquant.run_metadata import build_run_metadata, create_run_output_dir, write_run_metadata
 from rotationquant.stage_a import STAGE_A_METHODS, stage_a_method_supports_bits
@@ -17,7 +17,7 @@ from rotationquant.stage_a_model import apply_stage_a_weight_quant_
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Stage A A16Wb model-level PPL evaluation.")
-    parser.add_argument("--model-dir", default=TINYLLAMA_BASE_DIR)
+    parser.add_argument("--model-dir", default="models/TinyLlama-1.1B-intermediate-step-1431k-3T")
     parser.add_argument("--output-dir", default="outputs/stage_a")
     parser.add_argument("--methods", nargs="+", default=["fp16", "direct_absmax", "hadamard_absmax", "hadamard_lm"])
     parser.add_argument("--bits", nargs="+", type=int, default=[4, 3, 2])

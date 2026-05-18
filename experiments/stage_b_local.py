@@ -11,7 +11,7 @@ from tqdm import tqdm
 
 from rotationquant.activation_capture import LlamaLocalIOCapture
 from rotationquant.metrics import tensor_metrics
-from rotationquant.modeling import TINYLLAMA_BASE_DIR, load_causal_lm
+from rotationquant.modeling import load_causal_lm
 from rotationquant.ppl import load_text_dataset, tokenize_texts
 from rotationquant.run_metadata import build_run_metadata, create_run_output_dir, write_run_metadata
 from rotationquant.stage_b import (
@@ -25,7 +25,7 @@ from rotationquant.stage_b import (
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Stage B B2 local Linear / FFN fake quant experiments.")
-    parser.add_argument("--model-dir", default=TINYLLAMA_BASE_DIR)
+    parser.add_argument("--model-dir", default="models/TinyLlama-1.1B-intermediate-step-1431k-3T")
     parser.add_argument("--output-dir", default="outputs/stage_b")
     parser.add_argument(
         "--linear-methods",

@@ -9,7 +9,7 @@ from pathlib import Path
 import torch
 
 from rotationquant.attention_capture import LlamaAttentionCapture
-from rotationquant.modeling import TINYLLAMA_BASE_DIR, load_causal_lm
+from rotationquant.modeling import load_causal_lm
 from rotationquant.ppl import load_text_dataset, tokenize_texts
 from rotationquant.run_metadata import build_run_metadata, create_run_output_dir, write_run_metadata
 from rotationquant.stage_c import invariance_metrics
@@ -17,7 +17,7 @@ from rotationquant.stage_c import invariance_metrics
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Stage C C1 post-RoPE attention invariance sanity.")
-    parser.add_argument("--model-dir", default=TINYLLAMA_BASE_DIR)
+    parser.add_argument("--model-dir", default="models/TinyLlama-1.1B-intermediate-step-1431k-3T")
     parser.add_argument("--output-dir", default="outputs/stage_c")
     parser.add_argument("--dtype", choices=["float16", "bfloat16", "float32"], default="float16")
     parser.add_argument("--device-map", default=None)

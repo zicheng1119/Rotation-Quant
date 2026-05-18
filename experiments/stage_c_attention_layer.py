@@ -11,7 +11,7 @@ from tqdm import tqdm
 
 from rotationquant.attention_capture import LlamaAttentionCapture
 from rotationquant.metrics import cosine_similarity, relative_mse
-from rotationquant.modeling import TINYLLAMA_BASE_DIR, load_causal_lm
+from rotationquant.modeling import load_causal_lm
 from rotationquant.ppl import load_text_dataset, tokenize_texts
 from rotationquant.run_metadata import build_run_metadata, create_run_output_dir, write_run_metadata
 from rotationquant.stage_b import STAGE_B_METHODS
@@ -27,7 +27,7 @@ from rotationquant.stage_c_model import attention_layer_metrics_from_details, fa
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Stage C C4 local attention-layer experiments.")
-    parser.add_argument("--model-dir", default=TINYLLAMA_BASE_DIR)
+    parser.add_argument("--model-dir", default="models/TinyLlama-1.1B-intermediate-step-1431k-3T")
     parser.add_argument("--output-dir", default="outputs/stage_c")
     parser.add_argument(
         "--methods",

@@ -8,14 +8,14 @@ from pathlib import Path
 
 from tqdm import tqdm
 
-from rotationquant.modeling import TINYLLAMA_BASE_DIR, iter_llama_target_linears, load_causal_lm
+from rotationquant.modeling import iter_llama_target_linears, load_causal_lm
 from rotationquant.run_metadata import build_run_metadata, create_run_output_dir, write_run_metadata
 from rotationquant.stage_a import STAGE_A_METHODS, stage_a_method_supports_bits, stage_a_tensor_record
 
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Stage A weight-only tensor-level quantization sweep.")
-    parser.add_argument("--model-dir", default=TINYLLAMA_BASE_DIR)
+    parser.add_argument("--model-dir", default="models/TinyLlama-1.1B-intermediate-step-1431k-3T")
     parser.add_argument("--output-dir", default="outputs/stage_a")
     parser.add_argument("--bits", nargs="+", type=int, default=[4, 3, 2])
     parser.add_argument("--methods", nargs="+", default=["direct_absmax", "hadamard_absmax", "hadamard_lm"])
