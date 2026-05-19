@@ -1,0 +1,11 @@
+method,bits,ppl,block_size,mxfp4_group_size,dataset,dataset_config,split,max_samples,sequence_length,stride,quantized_layers
+fp16,16,6.27330515245728,,,wikitext,wikitext-2-raw-v1,test,512,2048,2048,0
+direct_absmax,4,7.129380459188881,128,,wikitext,wikitext-2-raw-v1,test,512,2048,2048,224
+direct_absmax,3,33.059410942868276,128,,wikitext,wikitext-2-raw-v1,test,512,2048,2048,224
+direct_absmax,2,1231550.6660709635,128,,wikitext,wikitext-2-raw-v1,test,512,2048,2048,224
+hadamard_absmax,4,7.19742992621751,128,,wikitext,wikitext-2-raw-v1,test,512,2048,2048,224
+hadamard_absmax,3,49.70842427781744,128,,wikitext,wikitext-2-raw-v1,test,512,2048,2048,224
+hadamard_absmax,2,1508747.5509503195,128,,wikitext,wikitext-2-raw-v1,test,512,2048,2048,224
+hadamard_lm,4,6.867116005227673,128,,wikitext,wikitext-2-raw-v1,test,512,2048,2048,224
+hadamard_lm,3,9.136476335103874,128,,wikitext,wikitext-2-raw-v1,test,512,2048,2048,224
+hadamard_lm,2,983.6364155677999,128,,wikitext,wikitext-2-raw-v1,test,512,2048,2048,224
