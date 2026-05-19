@@ -34,15 +34,16 @@ def torch_runtime_status() -> dict[str, object]:
         return {"torch_importable": False}
     status: dict[str, object] = {
         "torch_importable": True,
-        "mps_built": bool(torch.backends.mps.is_built()),
-        "mps_available": bool(torch.backends.mps.is_available()),
         "cuda_built": bool(torch.backends.cuda.is_built()),
         "cuda_available": bool(torch.cuda.is_available()),
     }
     try:
+        status["mps_built"] = bool(torch.backends.mps.is_built())
+        status["mps_available"] = bool(torch.backends.mps.is_available())
         status["mps_device_count"] = int(torch.mps.device_count())
     except Exception:
-        pass
+        status["mps_built"] = False
+        status["mps_available"] = False
     if torch.cuda.is_available():
         status["cuda_device_count"] = int(torch.cuda.device_count())
         status["cuda_device_names"] = [torch.cuda.get_device_name(i) for i in range(torch.cuda.device_count())]
