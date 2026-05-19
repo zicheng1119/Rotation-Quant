@@ -39,8 +39,10 @@ def torch_runtime_status() -> dict[str, object]:
         "cuda_built": bool(torch.backends.cuda.is_built()),
         "cuda_available": bool(torch.cuda.is_available()),
     }
-    if hasattr(torch, "mps"):
+    try:
         status["mps_device_count"] = int(torch.mps.device_count())
+    except Exception:
+        pass
     if torch.cuda.is_available():
         status["cuda_device_count"] = int(torch.cuda.device_count())
         status["cuda_device_names"] = [torch.cuda.get_device_name(i) for i in range(torch.cuda.device_count())]
