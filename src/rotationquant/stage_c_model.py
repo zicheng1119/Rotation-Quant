@@ -145,7 +145,7 @@ class StageCStructuredAttentionWrapper(torch.nn.Module):
         self.layer_idx = attention_module.layer_idx
         self.head_dim = attention_module.head_dim
         self.num_key_value_groups = attention_module.num_key_value_groups
-        self.scaling = float(attention_module.scaling)
+        self.scaling = float(getattr(attention_module, "scaling", attention_module.head_dim ** -0.5))
         self.attention_dropout = getattr(attention_module, "attention_dropout", 0.0)
         self.last_details: dict[str, torch.Tensor] | None = None
 

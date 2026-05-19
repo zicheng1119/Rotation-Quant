@@ -1,0 +1,7 @@
+method_key,method,bits,w_bits,a_bits,rotation,rotation_backend,block_size,mxfp4_group_size,compute_interpretation,quantized_ffn_modules,ppl,dataset,dataset_config,split,max_samples,sequence_length,stride
+fp16,fp16,FP16,16,16,none,none,,,baseline,0,6.27330515245728,wikitext,wikitext-2-raw-v1,test,512,2048,2048
+ffn_direct_absmax_w4a4,direct_absmax,W4A4,4,4,none,none,128,,block-wise uniform fake quant; future INT mapping is plausible,32,7.912518767621651,wikitext,wikitext-2-raw-v1,test,512,2048,2048
+ffn_rot_absmax_w4a4,rot_absmax,W4A4,4,4,block_hadamard_last_dim,hadamard,128,,rotation + uniform fake quant; needs rotation handling,32,7.3070238005781,wikitext,wikitext-2-raw-v1,test,512,2048,2048
+ffn_rot_lm_w4a4,rot_lm,W4A4,4,4,block_hadamard_last_dim,hadamard,128,,non-uniform codebook fake quant; not native INT GEMM,32,6.988947530562724,wikitext,wikitext-2-raw-v1,test,512,2048,2048
+ffn_rot_lm_w3a4,rot_lm,W3A4,3,4,block_hadamard_last_dim,hadamard,128,,non-uniform codebook fake quant; not native INT GEMM,32,8.58272467939975,wikitext,wikitext-2-raw-v1,test,512,2048,2048
+ffn_rot_lm_w4a3,rot_lm,W4A3,4,3,block_hadamard_last_dim,hadamard,128,,non-uniform codebook fake quant; not native INT GEMM,32,7.884946796387734,wikitext,wikitext-2-raw-v1,test,512,2048,2048

@@ -52,7 +52,7 @@ class _CaptureAttentionWrapper(torch.nn.Module):
         self.layer_idx = original_attention.layer_idx
         self.head_dim = original_attention.head_dim
         self.num_key_value_groups = original_attention.num_key_value_groups
-        self.scaling = float(original_attention.scaling)
+        self.scaling = float(getattr(original_attention, "scaling", original_attention.head_dim ** -0.5))
         self.attention_dropout = getattr(original_attention, "attention_dropout", 0.0)
 
     def forward(
